@@ -37,6 +37,22 @@ public class MailServer {
 
 	public static void main(String[] args) {
 
+		Buffer buffer = new Buffer();
+
+		ProductorMails pm1 = new ProductorMails("Productor 1", buffer);
+		ProductorMails pm2 = new ProductorMails("Productor 2", buffer);
+		ProductorMails pm3 = new ProductorMails("Productor 3", buffer);
+
+		ConsumidorMails cm1 = new ConsumidorMails("Consumidor 1", buffer);
+		ConsumidorMails cm2 = new ConsumidorMails("Consumidor 2", buffer);
+
+		pm1.start();
+		pm2.start();
+		pm3.start();
+
+		cm1.start();
+		cm2.start();
+
 	}
 
 }

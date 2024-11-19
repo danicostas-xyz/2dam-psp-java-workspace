@@ -1,27 +1,44 @@
 package entidad;
 
-public class ConsumidorMails {
-	private Email email;
+public class ConsumidorMails extends Thread {
+
 	private String nombreConsumidor = "Consumidor: " + Thread.currentThread().getName();
+	private Buffer buffer;
+	private Email email;
 
-	public ConsumidorMails() {
+	public ConsumidorMails(String nombreConsumidor, Buffer buffer) {
 		super();
-	}
-
-	public ConsumidorMails(Email email) {
-		super();
-		this.email = email;
-	}
-
-	public Email getEmail() {
-		return email;
+		this.buffer = buffer;
+		this.nombreConsumidor = nombreConsumidor;
 	}
 
 	public String getNombreConsumidor() {
 		return nombreConsumidor;
 	}
-	
-	public void setEmail(Email email) {
-		this.email = email;
+
+	public void setNombreConsumidor(String nombreConsumidor) {
+		this.nombreConsumidor = nombreConsumidor;
 	}
+
+	public Buffer getBuffer() {
+		return buffer;
+	}
+
+	public void setBuffer(Buffer buffer) {
+		this.buffer = buffer;
+	}
+
+	@Override
+	public void run() {
+		while (true) {
+			System.out.println(nombreConsumidor + " entrando al buffer\n");
+			email = buffer.getMail();
+			System.out.println(nombreConsumidor + " ha enviado el siguiente correo electrónico:\n"
+					+ "---------------------------------------------------------\n" + "- [ID]: " + email.getId()
+					+ "\n- [REMITENTE]: " + email.getRemitente() + "\n- [DESTINATARIO]: " + email.getDestinatario()
+					+ "\n- [ASUNTO]: " + email.getAsunto() + "\n- [MENSAJE]: \n" + email.getCuerpoMensaje()
+					+ "\n---------------------------------------------------------\n");
+		}
+	}
+
 }
