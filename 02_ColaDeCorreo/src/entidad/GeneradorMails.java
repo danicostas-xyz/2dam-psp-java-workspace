@@ -1,6 +1,6 @@
 package entidad;
 
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class GeneradorMails {
 	
@@ -22,20 +22,18 @@ public class GeneradorMails {
 				"antonio@yahoo.es", "pikachu@gmail.com", "pedrosanchez@gob.es", "upgradehub.escuela@gmail.com",
 				"jesuschrist@god.es", "messi_10@gmail.ar" };
 
-		Random r = new Random();
-		int p = r.nextInt(listaDestinatarios.length);
+		int p = ThreadLocalRandom.current().nextInt(0, listaDestinatarios.length);
 		return listaDestinatarios[p];
 	}
 
 	private String generarRemitente() {
 
-		String[] listaDestinatarios = new String[] { "cristianoronaldo@gmail.com", "iagoaspas@gmail.com",
+		String[] listaRemitentes = new String[] { "cristianoronaldo@gmail.com", "iagoaspas@gmail.com",
 				"diegoarmando@gmail.com", "viniciusjr@yahoo.es", "mewtwo@gmail.com", "elonmusk@gob.es",
 				"m.rajoy@gmail.com", "kanyewest@god.es", "kendricklamar@gmail.ar" };
 
-		Random r = new Random();
-		int p = r.nextInt(listaDestinatarios.length);
-		return listaDestinatarios[p];
+		int p = ThreadLocalRandom.current().nextInt(0, listaRemitentes.length);
+		return listaRemitentes[p];
 	}
 
 	private String generarAsunto() {
@@ -45,8 +43,7 @@ public class GeneradorMails {
 				"Propuesta de colaboración", "Problemas con el servidor principal", "Notificación de entrega pendiente",
 				"Recordatorio de vencimiento de contrato", "Nueva oferta para clientes premium" };
 
-		Random r = new Random();
-		int p = r.nextInt(listaAsuntos.length); // No es necesario el rango explícito.
+		int p = ThreadLocalRandom.current().nextInt(0, listaAsuntos.length);
 		return listaAsuntos[p];
 	}
 
@@ -63,8 +60,7 @@ public class GeneradorMails {
 				"No olvides revisar los archivos adjuntos y avisarme si necesitas algo más.",
 				"Estoy a tu disposición para aclarar cualquier duda. Quedo a la espera de tu respuesta." };
 
-		Random r = new Random();
-		int p = r.nextInt(listaCuerpos.length);
+		int p = ThreadLocalRandom.current().nextInt(0, listaCuerpos.length);
 		return listaCuerpos[p];
 	}
 
