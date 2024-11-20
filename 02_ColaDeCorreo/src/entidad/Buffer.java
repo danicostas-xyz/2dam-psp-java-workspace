@@ -22,17 +22,17 @@ public class Buffer {
 
 	public synchronized void addMail(Email em) {
 
+		if (!validarDestinatario(em)) {
+			System.out.println("No se admiten correos cuyo destinatario sea " + em.getDestinatario());
+			return;
+		}
+		
 		while (listaMails.size() == MAX_ELEM) {
 			try {
 				wait();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		}
-
-		if (!validarDestinatario(em)) {
-			notify();
-			return;
 		}
 
 		listaMails.add(em);
