@@ -1,8 +1,11 @@
 package entidad;
 
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class GeneradorMails {
+	
+	public int contador;
 	
 	public Email generarMail() {
 		
@@ -12,6 +15,7 @@ public class GeneradorMails {
 		email.setRemitente(generarRemitente());
 		email.setAsunto(generarAsunto());
 		email.setCuerpoMensaje(generarCuerpoMensaje());
+		email.setId(generarId());
 		
 		return email;
 	}
@@ -62,6 +66,10 @@ public class GeneradorMails {
 
 		int p = ThreadLocalRandom.current().nextInt(0, listaCuerpos.length);
 		return listaCuerpos[p];
+	}
+	
+	private synchronized int generarId() {
+		return contador++;
 	}
 
 }

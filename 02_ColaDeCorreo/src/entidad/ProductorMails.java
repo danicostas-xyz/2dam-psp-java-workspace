@@ -7,11 +7,11 @@ public class ProductorMails extends Thread {
 	private Email email;
 	private GeneradorMails gm;
 
-	public ProductorMails(String nombreProductor, Buffer buffer) {
+	public ProductorMails(String nombreProductor, Buffer buffer, GeneradorMails gm) {
 		super();
 		this.buffer = buffer;
 		this.nombreProductor = nombreProductor;
-		gm = new GeneradorMails();
+		this.gm = gm;
 	}
 
 	public Buffer getBuffer() {
@@ -48,7 +48,7 @@ public class ProductorMails extends Thread {
 
 	@Override
 	public void run() {
-
+		
 		email = gm.generarMail();
 
 		for (int i = 0; i < 10; i++) {

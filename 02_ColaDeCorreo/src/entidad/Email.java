@@ -1,62 +1,57 @@
 package entidad;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 public class Email {
 
-    private static AtomicInteger contadorId = new AtomicInteger(0);
+	private int id;
+	private String destinatario;
+	private String remitente;
+	private String asunto;
+	private String cuerpoMensaje;
 
-    private int id;
-    private String destinatario;
-    private String remitente;
-    private String asunto;
-    private String cuerpoMensaje;
-
-    @Override
+	@Override
 	public String toString() {
-		return ("---------------------------------------------------------\n" + "- [ID]: " + id
-		+ "\n- [REMITENTE]: " + remitente + "\n- [DESTINATARIO]: " + destinatario
-		+ "\n- [ASUNTO]: " + asunto + "\n- [MENSAJE]: \n" + cuerpoMensaje
-		+ "\n---------------------------------------------------------\n");
+		return ("---------------------------------------------------------\n" + "- [ID]: " + id + "\n- [REMITENTE]: "
+				+ remitente + "\n- [DESTINATARIO]: " + destinatario + "\n- [ASUNTO]: " + asunto + "\n- [MENSAJE]: \n"
+				+ cuerpoMensaje + "\n---------------------------------------------------------\n");
 	}
 
-	public Email() {
-    	this.id = contadorId.getAndIncrement();
-    }
-
 	public int getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public String getDestinatario() {
-        return destinatario;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public void setDestinatario(String destinatario) {
-        this.destinatario = destinatario;
-    }
+	public String getDestinatario() {
+		return destinatario;
+	}
 
-    public String getRemitente() {
-        return remitente;
-    }
+	public void setDestinatario(String destinatario) {
+		this.destinatario = destinatario;
+	}
 
-    public void setRemitente(String remitente) {
-        this.remitente = remitente;
-    }
+	public String getRemitente() {
+		return remitente;
+	}
 
-    public String getAsunto() {
-        return asunto;
-    }
+	public void setRemitente(String remitente) {
+		this.remitente = remitente;
+	}
 
-    public void setAsunto(String asunto) {
-        this.asunto = asunto;
-    }
+	public String getAsunto() {
+		return asunto;
+	}
 
-    public String getCuerpoMensaje() {
-        return cuerpoMensaje;
-    }
+	public void setAsunto(String asunto) {
+		this.asunto = asunto;
+	}
 
-    public void setCuerpoMensaje(String cuerpoMensaje) {
-        this.cuerpoMensaje = cuerpoMensaje;
-    }
+	public String getCuerpoMensaje() {
+		return cuerpoMensaje;
+	}
+
+	public void setCuerpoMensaje(String cuerpoMensaje) {
+		this.cuerpoMensaje = cuerpoMensaje;
+	}
 }

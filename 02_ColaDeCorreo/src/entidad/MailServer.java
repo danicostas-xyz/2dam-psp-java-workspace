@@ -38,10 +38,11 @@ public class MailServer {
 	public static void main(String[] args) {
 
 		Buffer buffer = new Buffer();
+		GeneradorMails gm = new GeneradorMails();
 
-		ProductorMails pm1 = new ProductorMails("Productor 1", buffer);
-		ProductorMails pm2 = new ProductorMails("Productor 2", buffer);
-		ProductorMails pm3 = new ProductorMails("Productor 3", buffer);
+		ProductorMails pm1 = new ProductorMails("Productor 1", buffer, gm);
+		ProductorMails pm2 = new ProductorMails("Productor 2", buffer, gm);
+		ProductorMails pm3 = new ProductorMails("Productor 3", buffer, gm);
 
 		ConsumidorMails cm1 = new ConsumidorMails("Consumidor 1", buffer);
 		ConsumidorMails cm2 = new ConsumidorMails("Consumidor 2", buffer);
