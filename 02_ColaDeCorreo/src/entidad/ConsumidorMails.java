@@ -34,10 +34,7 @@ public class ConsumidorMails extends Thread {
 			System.out.println(nombreConsumidor + " entrando al buffer\n");
 			email = buffer.getMail();
 			System.out.println(nombreConsumidor + " ha enviado el siguiente correo electrónico:\n"
-					+ "---------------------------------------------------------\n" + "- [ID]: " + email.getId()
-					+ "\n- [REMITENTE]: " + email.getRemitente() + "\n- [DESTINATARIO]: " + email.getDestinatario()
-					+ "\n- [ASUNTO]: " + email.getAsunto() + "\n- [MENSAJE]: \n" + email.getCuerpoMensaje()
-					+ "\n---------------------------------------------------------\n");
+					+ email.toString());
 		}
 	}
 

@@ -12,7 +12,15 @@ public class Email {
     private String asunto;
     private String cuerpoMensaje;
 
-    public Email() {
+    @Override
+	public String toString() {
+		return ("---------------------------------------------------------\n" + "- [ID]: " + id
+		+ "\n- [REMITENTE]: " + remitente + "\n- [DESTINATARIO]: " + destinatario
+		+ "\n- [ASUNTO]: " + asunto + "\n- [MENSAJE]: \n" + cuerpoMensaje
+		+ "\n---------------------------------------------------------\n");
+	}
+
+	public Email() {
     	this.id = contadorId.getAndIncrement();
     }
 
