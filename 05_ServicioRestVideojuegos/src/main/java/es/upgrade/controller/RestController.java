@@ -36,9 +36,6 @@ public class RestController {
 			@RequestParam(name = "name", required = false) String name,
 			@RequestParam(name = "company", required = false) String company,
 			@RequestParam(name = "rating", required = false) Double rating) {
-
-		// Al hacer la consulta, si no hay ningún nombre, hay que poner ?name=null&company=whatever
-		// Lo mejor sería hacer un método para cada consulta
 		
 		List<Videogame> videogamesList = null;
 		HashSet<Videogame> hashSet = new HashSet<Videogame>();
