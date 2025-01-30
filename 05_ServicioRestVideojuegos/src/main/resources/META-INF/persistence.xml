@@ -3,7 +3,7 @@
 	<persistence-unit name="jpaUnit" transaction-type="RESOURCE_LOCAL">
 		<!-- Aqui pondemos todas las clases que queremos que JPA vaya a leer las anotaciones
 		para poder mapearlas a la BBDD -->
-		<class>es.upgrade.model.entity.*</class>
+		<class>es.upgrade.model.entity.Videogame</class>
 		<properties>
 			<!-- Tenemos una seríe de parametros minimos que decirle a JPA para que se pueda
 			contectar a la BBDD -->
@@ -18,7 +18,7 @@
 			tablas desde cero.
 			update -> para solamente refrescar las tablas en caso de cambios de anotaciones
 			 -->
-			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+			<property name="javax.persistence.schema-generation.database.action" value="update"/>
 						 
 			<!-- Mostrar trazas de sql y establecer dialecto con hibernate -->
 			<property name = "hibernate.show_sql" value = "true" />

@@ -16,15 +16,38 @@ import es.upgrade.model.entity.Videogame;
 public class DaoVideogame {
 
 	EntityManagerFactory factory = Persistence.createEntityManagerFactory("jpaUnit");
-	
-	
+
 	public List<Videogame> readAllVideogames() {
 		EntityManager eManager = factory.createEntityManager();
-		String jpql = "SELECT m FROM videogames m";
-        TypedQuery<Videogame> query = eManager.createQuery(jpql, Videogame.class);
-        return query.getResultList();
+		String jpql = "SELECT v FROM Videogame v";
+		TypedQuery<Videogame> query = eManager.createQuery(jpql, Videogame.class);
+		return query.getResultList();
 	}
-	
+
+	public List<Videogame> readVideogameByName(String name) {
+		EntityManager eManager = factory.createEntityManager();
+		String jpql = "SELECT v FROM Videogame v WHERE v.name = :name"; // Usar :name como parámetro
+		TypedQuery<Videogame> query = eManager.createQuery(jpql, Videogame.class);
+		query.setParameter("name", name); // Asignar el valor al parámetro
+		return query.getResultList();
+	}
+
+	public List<Videogame> readVideogameByCompany(String company) {
+		EntityManager eManager = factory.createEntityManager();
+		String jpql = "SELECT v FROM Videogame v WHERE v.company = :company"; // Usar :name como parámetro
+		TypedQuery<Videogame> query = eManager.createQuery(jpql, Videogame.class);
+		query.setParameter("company", company); // Asignar el valor al parámetro
+		return query.getResultList();
+	}
+
+	public List<Videogame> readVideogameByRating(Double rating) {
+		EntityManager eManager = factory.createEntityManager();
+		String jpql = "SELECT v FROM Videogame v WHERE v.rating = :rating"; // Usar :name como parámetro
+		TypedQuery<Videogame> query = eManager.createQuery(jpql, Videogame.class);
+		query.setParameter("rating", rating); // Asignar el valor al parámetro
+		return query.getResultList();
+	}
+
 	public Integer createVideogame(Videogame v) {
 		Integer result = null;
 		EntityManager eManager = factory.createEntityManager();
@@ -35,7 +58,7 @@ public class DaoVideogame {
 		eManager.close();
 		return result;
 	}
-		
+
 	public Videogame readVideogameById(int id) {
 		Videogame result = null;
 		EntityManager eManager = factory.createEntityManager();
@@ -43,15 +66,7 @@ public class DaoVideogame {
 		eManager.close();
 		return result;
 	}
-	
-	public Videogame readVideogameByName(String name) {
-		Videogame result = null;
-		EntityManager eManager = factory.createEntityManager();
-		result = eManager.find(Videogame.class, name);
-		eManager.close();
-		return result;
-	}
-	
+
 	public Videogame updateVideogame(Videogame v) {
 		EntityManager eManager = factory.createEntityManager();
 		EntityTransaction transaction = eManager.getTransaction();
@@ -61,15 +76,17 @@ public class DaoVideogame {
 		eManager.close();
 		return v;
 	}
-	
-	public Integer deleteVideogame(Videogame v) {
+
+	public Integer deleteVideogameById(int id) {
 		Integer result = null;
 		EntityManager eManager = factory.createEntityManager();
 		EntityTransaction transaction = eManager.getTransaction();
 		transaction.begin();
+		Videogame v = eManager.find(Videogame.class, id);
 		eManager.remove(v);
 		transaction.commit();
 		eManager.close();
 		return result;
 	}
+
 }

@@ -2,9 +2,6 @@ package es.upgrade.model.service;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +14,10 @@ public class ServiceVideogame {
 	@Autowired
 	private DaoVideogame dao;
 
-	public List<Videogame> readAllVideogames(){
+	public List<Videogame> readAllVideogames() {
 		return dao.readAllVideogames();
 	}
-	
+
 	public Integer createVideogame(Videogame v) {
 		return dao.createVideogame(v);
 	}
@@ -29,7 +26,7 @@ public class ServiceVideogame {
 		return dao.readVideogameById(id);
 	}
 
-	public Videogame readVideogameByName(String name) {
+	public List<Videogame> readVideogameByName(String name) {
 		return dao.readVideogameByName(name);
 	}
 
@@ -37,7 +34,15 @@ public class ServiceVideogame {
 		return dao.updateVideogame(v);
 	}
 
-	public Integer deleteVideogame(Videogame v) {
-		return dao.deleteVideogame(v);
+	public Integer deleteVideogameById(int id) {
+		return dao.deleteVideogameById(id);
+	}
+
+	public List<Videogame> readVideogameByCompany(String company) {
+		return dao.readVideogameByCompany(company);
+	}
+
+	public List<Videogame> readVideogameByRating(Double rating) {
+		return dao.readVideogameByRating(rating);
 	}
 }
