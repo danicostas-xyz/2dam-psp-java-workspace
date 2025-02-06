@@ -56,7 +56,7 @@ public class DaoVideogame {
 		eManager.persist(v);
 		transaction.commit();
 		eManager.close();
-		return result;
+		return result = 1;
 	}
 
 	public Videogame readVideogameById(int id) {

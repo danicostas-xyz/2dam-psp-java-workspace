@@ -18,7 +18,24 @@ public class ServiceVideogame {
 		return dao.readAllVideogames();
 	}
 
+	/**
+	 * 
+	 * @param v El videojuego a persistir.
+	 * @return 0 en caso de que el videojuego tenga el nombre en blanco, 666 en caso
+	 *         de que ya exista un videojuego en la persistencia con el mismo
+	 *         nombre, 1 en caso de que el videojuego se haya persistido
+	 *         correctamente
+	 */
 	public Integer createVideogame(Videogame v) {
+
+		if (v.getName().isBlank()) {
+			return 0;
+		}
+
+		if (!dao.readVideogameByName(v.getName()).isEmpty()) {
+			return 666;
+		}
+
 		return dao.createVideogame(v);
 	}
 

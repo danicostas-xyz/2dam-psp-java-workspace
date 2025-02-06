@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import es.upgrade.model.entity.ErrorResponse;
 import es.upgrade.model.entity.Videogame;
 import es.upgrade.model.service.ServiceVideogame;
 
@@ -85,13 +86,22 @@ public class RestController {
 	 * 
 	 */
 	@PostMapping(path = "videogame", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Videogame> createVideogame(@RequestBody Videogame v) {
+	public ResponseEntity<Object> createVideogame(@RequestBody Videogame v) {
 
-		service.createVideogame(v);
-		return new ResponseEntity<Videogame>(v, HttpStatus.OK);
+		Integer result = service.createVideogame(v);
+		if (result == 666) {
+			ErrorResponse error = new ErrorResponse("El videojuego ya existe");
+			return new ResponseEntity<Object>(error, HttpStatus.CONFLICT);
+		}
+		
+		if (result == 0) {
+			ErrorResponse error = new ErrorResponse("El videojuego tiene que tener un nombre");
+			return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity<Object>(v, HttpStatus.OK);
 	}
-
-	/**
+	
+		/**
 	 * Update Videogame
 	 * 
 	 * -> PUT localhost:6969/videogame/ (videogame.json in Request Body)
