@@ -9,12 +9,12 @@ import xyz.danicostas.model.service.EncryptService;
 
 @Component
 public class CommandLineInterface {
-	
+
 	@Autowired
 	private EncryptService service;
 	private Scanner scInt = new Scanner(System.in);
 	private Scanner scStr = new Scanner(System.in);
-	
+
 	public void runApp() {
 
 		printSlowly("CARGANDO", 5);
@@ -25,7 +25,7 @@ public class CommandLineInterface {
 		System.out.println("================================");
 
 		printMainMenu();
-		int opcion = validarOpcion(0, 7);
+		int opcion = validarOpcion(0, 9);
 
 		while (opcion != 0) {
 
@@ -65,6 +65,16 @@ public class CommandLineInterface {
 				printMainMenu();
 				opcion = validarOpcion(0, 7);
 				break;
+			case 8:
+				hashPassword();
+				printMainMenu();
+				opcion = validarOpcion(0, 9);
+				break;
+			case 9:
+				verifyPassword();
+				printMainMenu();
+				opcion = validarOpcion(0, 9);
+				break;
 			default:
 				break;
 			}
@@ -75,7 +85,31 @@ public class CommandLineInterface {
 		System.out.println("       FIN DEL PROGRAMA      ");
 		System.out.println("=============================");
 	}
-	
+
+	private void verifyPassword() {
+		printlnSlowly("INICIAR SESIÓN:", 5);
+		System.out.println();
+		printSlowly("Contraseña: ", 5);
+		String text = scStr.nextLine();
+		Integer result = service.verifyPassword(text);
+		printSlowly("Verificando", 20);
+		print3Points(20, 20);
+
+		if (result == 0) printlnSlowly("Contraseña correcta.", 10);
+		else printlnSlowly("Contraseña incorrecta.", 10);
+	}
+
+	private void hashPassword() {
+		printlnSlowly("CREA TU NUEVA CONTRASEÑA:", 5);
+		System.out.println();
+		printSlowly("Contraseña: ", 5);
+		String text = scStr.nextLine();
+		service.hashPassword(text);
+		printSlowly("Guardando", 20);
+		print3Points(20, 20);
+		printlnSlowly("Contraseña guardada.", 10);
+	}
+
 	private void verifyConfidentiality() {
 		printlnSlowly("LEER MENSAJE CONFIDENCIAL", 5);
 		System.out.println();
@@ -85,7 +119,7 @@ public class CommandLineInterface {
 		printSlowly("Pulsa enter para mostrar el texto confidencial", 20);
 		scStr.nextLine();
 		printlnSlowly("Texto: " + text, 10);
-		
+
 	}
 
 	private void confidentiality() {
@@ -98,7 +132,7 @@ public class CommandLineInterface {
 		print3Points(20, 20);
 		printlnSlowly("Texto encriptado.", 10);
 		printlnSlowly("Solo tu destinatario puede desencriptar el mensaje.", 10);
-		
+
 	}
 
 	private void verifyAuthorship() {
@@ -110,7 +144,7 @@ public class CommandLineInterface {
 		printSlowly("Pulsa enter para mostrar el texto verificado", 20);
 		scStr.nextLine();
 		printlnSlowly("Texto verificado: " + text, 10);
-		
+
 	}
 
 	private void authorship() {
@@ -122,7 +156,7 @@ public class CommandLineInterface {
 		printSlowly("Autenticando", 20);
 		print3Points(20, 20);
 		printlnSlowly("Texto autenticado.", 10);
-		
+
 	}
 
 	private void decryptText() {
@@ -136,7 +170,6 @@ public class CommandLineInterface {
 		printlnSlowly("Texto desencriptado: " + text, 10);
 	}
 
-
 	private void showEncryptedText() {
 		printlnSlowly("REPOSITORIO", 5);
 		System.out.println();
@@ -146,7 +179,6 @@ public class CommandLineInterface {
 		printlnSlowly("Texto encriptado:", 10);
 		printlnSlowly(text, 5);
 	}
-
 
 	private void encryptText() {
 		printlnSlowly("ENCRIPTADOR", 5);
@@ -159,7 +191,6 @@ public class CommandLineInterface {
 		printlnSlowly("Texto encriptado.", 10);
 	}
 
-
 	private void printMainMenu() {
 		System.out.println("\n================================");
 		printlnSlowly("- 0. Salir de la aplicación", 5);
@@ -170,12 +201,13 @@ public class CommandLineInterface {
 		printlnSlowly("- 5. Comprobar autoría de mensaje (asimétrica)", 5);
 		printlnSlowly("- 6. Garantizar confidencialidad de mensaje (asimétrica)", 5);
 		printlnSlowly("- 7. Desencriptar mensaje confidencial (asimétrica)", 5);
+		printlnSlowly("- 8. Crear contraseña (hashing)", 5);
+		printlnSlowly("- 9. Iniciar sesión (hashing)", 5);
 
 		System.out.println("================================\n");
 		printSlowly("- Seleccione una opción: ", 5);
 	}
-	
-	
+
 	private int validarIntNoVacio(String atributo) {
 		int i = scInt.nextInt();
 
@@ -252,6 +284,4 @@ public class CommandLineInterface {
 		System.out.println("");
 	}
 
-	
-	
 }

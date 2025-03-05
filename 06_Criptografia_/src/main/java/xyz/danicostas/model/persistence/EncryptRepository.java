@@ -11,7 +11,17 @@ public class EncryptRepository {
 	// ASYMMETRIC
 	private byte[] dataWithAuthorship;
 	private byte[] dataWithConfidentiality;
+	// HASHING
+	private String password;
 	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public void setEncryptedDataWithSecretKey(byte[] encryptedText) {
 		this.encryptedDataWithSecretKey = encryptedText;
 	}
